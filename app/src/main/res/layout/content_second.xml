@@ -12,4 +12,9 @@
     tools:context="com.example.pedro.inf4042.SecondActivity"
     tools:showIn="@layout/activity_second">
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv"></android.support.v7.widget.RecyclerView>
+
 </RelativeLayout>
