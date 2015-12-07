@@ -53,11 +53,11 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(i[0] ==0) {
-                    rv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
                     i[0] ++;
                 }
                 else {
-                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+                    rv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
                     i[0] = 0;
                 }
 
@@ -65,7 +65,7 @@ public class SecondActivity extends AppCompatActivity {
         });
 
         rv = (RecyclerView)findViewById(R.id.rv);
-        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        rv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         rv.setAdapter(new BiersAdapter());
     }
 
