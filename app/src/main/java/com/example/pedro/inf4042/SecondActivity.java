@@ -129,6 +129,7 @@ public class SecondActivity extends AppCompatActivity {
                 try {
                     Intent i = new Intent(getApplicationContext(),ThirdActivity.class);
                     i.putExtra("name", biers.getJSONObject(getPosition()).getString("name"));
+                    i.putExtra("description", biers.getJSONObject(getPosition()).getString("description"));
                     startActivity(i);
                 } catch (JSONException e) {
                     e.printStackTrace();

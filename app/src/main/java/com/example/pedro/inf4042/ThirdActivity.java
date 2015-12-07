@@ -21,8 +21,10 @@ public class ThirdActivity extends AppCompatActivity {
 
         Intent i = getIntent();
        String name = i.getStringExtra("name");
+        String description = i.getStringExtra("description");
 
         tx = (TextView)findViewById(R.id.description_bieres);
-       tx.setText("Name : "+name);
+       tx.setText("Name : "+name+"\n"+
+                    "Description : "+description);
     }
 }
