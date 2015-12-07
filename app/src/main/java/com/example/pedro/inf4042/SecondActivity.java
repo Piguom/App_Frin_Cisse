@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -29,6 +30,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.LineNumberReader;
+import java.io.Serializable;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -46,10 +48,19 @@ public class SecondActivity extends AppCompatActivity {
         GetBiersServices.startActionBiers(getApplicationContext());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final int[] i = {0};
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rv.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+                if(i[0] ==0) {
+                    rv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+                    i[0] ++;
+                }
+                else {
+                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+                    i[0] = 0;
+                }
+
             }
         });
 
@@ -99,7 +110,7 @@ public class SecondActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(BiersAdapter.BierHolder holder, int position) {
             try {
-                holder.name.setText((biers.getJSONObject(position).getString("name")));
+                holder.name.setText((biers.getJSONObject(position).getString("name"))+"\n"+(biers.getJSONObject(position).getString("description")));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -130,9 +141,18 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    image_name.buildDrawingCache();
+                    Bitmap image = image_name.getDrawingCache();
+                    Bundle extras = new Bundle();
+                    extras.putParcelable("img", image);
+
                     Intent i = new Intent(getApplicationContext(),ThirdActivity.class);
                     i.putExtra("name", biers.getJSONObject(getPosition()).getString("name"));
                     i.putExtra("description", biers.getJSONObject(getPosition()).getString("description"));
+                    i.putExtra("notes", biers.getJSONObject(getPosition()).getString("note"));
+                    i.putExtra("time", biers.getJSONObject(getPosition()).getString("created_at"));
+                    i.putExtras(extras);
+
                     startActivity(i);
                 } catch (JSONException e) {
                     e.printStackTrace();
