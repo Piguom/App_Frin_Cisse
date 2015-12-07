@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,7 +53,7 @@ public class SecondActivity extends AppCompatActivity {
         });
 
         rv = (RecyclerView)findViewById(R.id.rv);
-        rv.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rv.setAdapter(new BiersAdapter());
     }
 
@@ -113,20 +114,25 @@ public class SecondActivity extends AppCompatActivity {
             notifyDataSetChanged();
         }
 
-        public class BierHolder extends RecyclerView.ViewHolder{
+        public class BierHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
             public TextView name = null;
 
             public BierHolder(View itemView) {
                 super(itemView);
+                itemView.setOnClickListener(this);
                 name = (TextView)itemView.findViewById(R.id.rv_bier_element_name);
-                name.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), ThirdActivity.class);
-                        startActivity(i);
-                    }
-                });
+            }
+
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent i = new Intent(getApplicationContext(),ThirdActivity.class);
+                    i.putExtra("name", biers.getJSONObject(getPosition()).getString("name"));
+                    startActivity(i);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
