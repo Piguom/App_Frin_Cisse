@@ -120,6 +120,13 @@ public class SecondActivity extends AppCompatActivity {
             public BierHolder(View itemView) {
                 super(itemView);
                 name = (TextView)itemView.findViewById(R.id.rv_bier_element_name);
+                name.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), ThirdActivity.class);
+                        startActivity(i);
+                    }
+                });
             }
         }
     }

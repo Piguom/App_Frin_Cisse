@@ -21,6 +21,9 @@
             android:name=".SecondActivity"
             android:label="@string/title_activity_second"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ThirdActivity"
+            android:label="Third Activity" />
 
         <service
             android:name=".GetBiersServices"
