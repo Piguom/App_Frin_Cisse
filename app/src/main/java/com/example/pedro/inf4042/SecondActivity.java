@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,8 +49,7 @@ public class SecondActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                rv.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
             }
         });
 
@@ -117,11 +118,13 @@ public class SecondActivity extends AppCompatActivity {
         public class BierHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
             public TextView name = null;
+            public ImageView image_name = null;
 
             public BierHolder(View itemView) {
                 super(itemView);
                 itemView.setOnClickListener(this);
                 name = (TextView)itemView.findViewById(R.id.rv_bier_element_name);
+                image_name = (ImageView)itemView.findViewById(R.id.rv_bier_element_img_desc);
             }
 
             @Override
