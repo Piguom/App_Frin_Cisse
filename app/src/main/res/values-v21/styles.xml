@@ -6,4 +6,8 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="App_Frin_Cisse" parent="Platform.AppCompat">
+        <item name="android:colorAccent">@color/accent_material_dark_1</item>
+    </style>
 </resources>

@@ -16,6 +16,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -40,7 +42,7 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
         IntentFilter intentFilter = new IntentFilter(BIERS_UPDATE);
@@ -110,7 +112,7 @@ public class SecondActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(BiersAdapter.BierHolder holder, int position) {
             try {
-                holder.name.setText((biers.getJSONObject(position).getString("name"))+"\n"+(biers.getJSONObject(position).getString("description")));
+                holder.name.setText((biers.getJSONObject(position).getString("name")) + "\n" + (biers.getJSONObject(position).getString("description")));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -133,6 +135,18 @@ public class SecondActivity extends AppCompatActivity {
 
             public BierHolder(View itemView) {
                 super(itemView);
+                Toolbar toolbar = (Toolbar)itemView.findViewById(R.id.card_toolbar);
+                if (toolbar != null) {
+                    // inflate your menu
+                    toolbar.inflateMenu(R.menu.menu);
+                    toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            return true;
+                        }
+                    });
+                }
+
                 itemView.setOnClickListener(this);
                 name = (TextView)itemView.findViewById(R.id.rv_bier_element_name);
                 image_name = (ImageView)itemView.findViewById(R.id.rv_bier_element_img_desc);

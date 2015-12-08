@@ -37,7 +37,7 @@ public class ThirdActivity extends AppCompatActivity {
         notes = (TextView)findViewById(R.id.notes_biers);
         image = (ImageView)findViewById(R.id.image_desc);
 
-        name.setText("Name : "+name_tx+"\n");
+        name.setText(name_tx+"\n");
         desc.setText("Description : "+description_tx+"\n");
         time.setText("Created at : "+time_tx+"\n");
         notes.setText("Notes : "+notes_tx+"\n");
