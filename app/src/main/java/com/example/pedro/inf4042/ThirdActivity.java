@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
@@ -14,8 +16,9 @@ import android.widget.TextView;
  */
 public class ThirdActivity extends AppCompatActivity {
 
-    public TextView name, desc, time, notes;
+    public TextView name, desc, time, notes, rate;
     public ImageView image;
+    public RatingBar rb;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,12 +38,24 @@ public class ThirdActivity extends AppCompatActivity {
         desc = (TextView)findViewById(R.id.description_biers);
         time = (TextView)findViewById(R.id.time_biers);
         notes = (TextView)findViewById(R.id.notes_biers);
+        rate = (TextView)findViewById(R.id.rate_score);
         image = (ImageView)findViewById(R.id.image_desc);
+        rb = (RatingBar)findViewById(R.id.ratingBar);
+        rb.setIsIndicator(true);
+        rb.setNumStars(5);
 
         name.setText(name_tx+"\n");
-        desc.setText("Description : "+description_tx+"\n");
-        time.setText("Created at : "+time_tx+"\n");
-        notes.setText("Notes : "+notes_tx+"\n");
+        desc.setText("Description : " + description_tx + "\n");
+        time.setText("Created at : " + time_tx + "\n");
+        if(notes_tx != "0") {
+            //Log.d("ahahahaha","note = null");
+            rb.setRating((Float.valueOf(notes_tx.trim()).floatValue()) / 2);
+            rate.setText((Float.valueOf(notes_tx.trim()).floatValue()) / 2+"/5\n");
+        }
+        else {
+            rb.setVisibility(View.INVISIBLE);
+            notes.setText("Il n'y a pas de note de pour cet article\n");
+        }
         image.setImageBitmap(bmp);
     }
 }

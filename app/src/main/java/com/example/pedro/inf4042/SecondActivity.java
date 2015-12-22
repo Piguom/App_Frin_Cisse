@@ -62,7 +62,6 @@ public class SecondActivity extends AppCompatActivity {
                     rv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
                     i[0] = 0;
                 }
-
             }
         });
 
@@ -70,6 +69,28 @@ public class SecondActivity extends AppCompatActivity {
         rv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         rv.setAdapter(new BiersAdapter());
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_second, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.name:
+                //Insert code to sort by name
+                break;
+
+            case R.id.type:
+                //Insert code to sort by type
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
 
     public static final String BIERS_UPDATE = "com.example.pedro.inf4042.action.BIERS_UPDATE";
     public class BiersUpdate extends BroadcastReceiver {
@@ -112,7 +133,7 @@ public class SecondActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(BiersAdapter.BierHolder holder, int position) {
             try {
-                holder.name.setText((biers.getJSONObject(position).getString("name")) + "\n" + (biers.getJSONObject(position).getString("description")));
+                holder.name.setText((biers.getJSONObject(position).getString("name")));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -135,7 +156,8 @@ public class SecondActivity extends AppCompatActivity {
 
             public BierHolder(View itemView) {
                 super(itemView);
-                Toolbar toolbar = (Toolbar)itemView.findViewById(R.id.card_toolbar);
+
+               /* Toolbar toolbar = (Toolbar)itemView.findViewById(R.id.card_toolbar);
                 if (toolbar != null) {
                     // inflate your menu
                     toolbar.inflateMenu(R.menu.menu);
@@ -145,7 +167,7 @@ public class SecondActivity extends AppCompatActivity {
                             return true;
                         }
                     });
-                }
+                }*/
 
                 itemView.setOnClickListener(this);
                 name = (TextView)itemView.findViewById(R.id.rv_bier_element_name);
@@ -159,11 +181,16 @@ public class SecondActivity extends AppCompatActivity {
                     Bitmap image = image_name.getDrawingCache();
                     Bundle extras = new Bundle();
                     extras.putParcelable("img", image);
+                    String b = biers.getJSONObject(getPosition()).getString("note");;
+
+                    if( b == "null"){
+                        b = "0";
+                    }
 
                     Intent i = new Intent(getApplicationContext(),ThirdActivity.class);
                     i.putExtra("name", biers.getJSONObject(getPosition()).getString("name"));
                     i.putExtra("description", biers.getJSONObject(getPosition()).getString("description"));
-                    i.putExtra("notes", biers.getJSONObject(getPosition()).getString("note"));
+                    i.putExtra("notes",b);
                     i.putExtra("time", biers.getJSONObject(getPosition()).getString("created_at"));
                     i.putExtras(extras);
 
