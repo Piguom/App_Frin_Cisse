@@ -65,12 +65,12 @@ public class GetBiersServices extends IntentService {
         Log.i("GetBiersServices","Thread service name: " + Thread.currentThread().getName());
         URL url = null;
         try{
-            url = new URL("http://binouze.fabrigli.fr/bieres.json");
+            url = new URL("http://sportstore-frin-cisse.herokuapp.com/sports.json");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
             if(HttpURLConnection.HTTP_OK == conn.getResponseCode()){
-                copyInputStreamToFile(conn.getInputStream(),new File(getCacheDir(),"bieres.json"));
+                copyInputStreamToFile(conn.getInputStream(),new File(getCacheDir(),"sports.json"));
                 Log.i("GetBiersServices","Bieres json downloaded !");
             }
         }catch(MalformedURLException e){

@@ -105,7 +105,7 @@ public class SecondActivity extends AppCompatActivity {
 
     public JSONArray getBiersFromFile(){
         try{
-            InputStream is = new FileInputStream(getCacheDir()+"/"+"bieres.json");
+            InputStream is = new FileInputStream(getCacheDir()+"/"+"sports.json");
             byte[] buffer = new byte[is.available()];
             is.read(buffer);
             is.close();
@@ -181,17 +181,17 @@ public class SecondActivity extends AppCompatActivity {
                     Bitmap image = image_name.getDrawingCache();
                     Bundle extras = new Bundle();
                     extras.putParcelable("img", image);
-                    String b = biers.getJSONObject(getPosition()).getString("note");;
+                  /*  String b = biers.getJSONObject(getPosition()).getString("note");;
 
                     if( b == "null"){
                         b = "0";
-                    }
+                    }*/
 
                     Intent i = new Intent(getApplicationContext(),ThirdActivity.class);
                     i.putExtra("name", biers.getJSONObject(getPosition()).getString("name"));
                     i.putExtra("description", biers.getJSONObject(getPosition()).getString("description"));
-                    i.putExtra("notes",b);
-                    i.putExtra("time", biers.getJSONObject(getPosition()).getString("created_at"));
+                 //   i.putExtra("notes",b);
+                  //  i.putExtra("time", biers.getJSONObject(getPosition()).getString("created_at"));
                     i.putExtras(extras);
 
                     startActivity(i);

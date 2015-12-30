@@ -28,8 +28,8 @@ public class ThirdActivity extends AppCompatActivity {
         Intent i = getIntent();
         String name_tx = i.getStringExtra("name");
         String description_tx = i.getStringExtra("description");
-        String notes_tx = i.getStringExtra("notes");
-        String time_tx = i.getStringExtra("time");
+      //  String notes_tx = i.getStringExtra("notes");
+      //  String time_tx = i.getStringExtra("time");
 
         Bundle extras = getIntent().getExtras();
         Bitmap bmp = (Bitmap)extras.getParcelable("img");
@@ -46,7 +46,7 @@ public class ThirdActivity extends AppCompatActivity {
 
         name.setText(name_tx+"\n");
         desc.setText("Description : " + description_tx + "\n");
-        time.setText("Created at : " + time_tx + "\n");
+      /*  time.setText("Created at : " + time_tx + "\n");
         if(notes_tx != "0") {
             //Log.d("ahahahaha","note = null");
             rb.setRating((Float.valueOf(notes_tx.trim()).floatValue()) / 2);
@@ -55,7 +55,7 @@ public class ThirdActivity extends AppCompatActivity {
         else {
             rb.setVisibility(View.INVISIBLE);
             notes.setText("Il n'y a pas de note de pour cet article\n");
-        }
+        }*/
         image.setImageBitmap(bmp);
     }
 }
